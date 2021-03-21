@@ -1,8 +1,8 @@
 import { useState, useEffect } from 'react';
-// import { NavLink, Route, useParams, useRouteMatch, useHistory, useLocation, } from 'react-router-dom';
+import { NavLink, Route, useRouteMatch } from 'react-router-dom';
 import { getMoviesDetailsViews } from "../service/api-service";
 // import { toast } from 'react-toastify';
-import routes from 'routes';
+// import routes from 'routes';
 
 import MovieCard from '../components/MovieCard/MovieCard';
 
@@ -13,7 +13,7 @@ const MovieDetailsPage = props => {
   const {location, history} = props;
   const { movieId } = props.match.params;
   const [movie, setMovie] = useState(null);
-
+  const {url, path} = useRouteMatch();
   const [loading, setLoading] = useState(false);
 
 
@@ -40,17 +40,32 @@ const MovieDetailsPage = props => {
 
   return (
     <>
-     {movie ? (
-        <>
           <button
             type="button"
             onClick={handleButtonGoBack}
           >
             Go back
           </button>
+     {movie ? (
+        <>
+          <MovieCard movie={movie}/>
 
-          <MovieCard {...movie} {...props}/>
-       
+          <p>Aditional information</p>
+          <ul>
+            <li>
+              <NavLink  to={`${url}/cast`}>Cast</NavLink>
+            </li>
+            <li>
+              <NavLink to={`${url}/rewiews`}></NavLink>
+            </li>
+          </ul>
+          <hr />
+          <Route path={`${path}/cast`}>
+             {movie && <Cast/>}
+          </Route>
+          <Route path={`${path}/rewiews`}>
+             {movie && <Reviews/>}
+          </Route>
         </>
       ) : (
         <h2>No detail information for this film!</h2>

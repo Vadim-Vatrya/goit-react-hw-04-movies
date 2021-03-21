@@ -29,31 +29,7 @@ const MovieCard = ({movie}) => {
         </ul>
     </div>
 
-    <ul >
-            <li >
-              <NavLink
-                className={s.style}
-                to={{
-                  pathname: `${url}/cast`,
-                  state: { from: location },
-                }}
-              >
-                Cast
-              </NavLink>
-            </li>
-            <li className={s.detailsItem}>
-              <NavLink
-                className={s.style}
-                to={{
-                  pathname: `${url}/reviews`,
-                  state: { from: location },
-                }}
-              >
-                Reviews
-              </NavLink>
-            </li>
-          </ul>
-       
+    
     </>
   );
 };
