@@ -9,7 +9,7 @@ import SearchBar from '../components/SearchBar/SearchBar';
 
 const MoviesPage = props => {
   const { history, location } = props;
-  const [movies, setMovies] = useState(null);
+  const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState(queryString.parse(location.search).query || '',);
 
@@ -18,29 +18,25 @@ const MoviesPage = props => {
   }, [location.search]);
 
   useEffect(() => {
-    setLoading(true);
-    history.push({
-      ...location,
-      search: `?query=${query}`,
-    });
-
+    
     if(query === 0 || !query) {
-      setQuery([]);
+      setMovies([]);
       return;
     }
     
+    setLoading(true);
+
     getSearchMovies()
     .then(({ results }) => {
       if(results.length === 0) {
         toast.error(`No results were found for ${query}!`);
-        setQuery('')
-        return;
+        setQuery('');
       }
       setMovies(results);
     })
     .catch(error => console.log('Error: ', error))
     .finally(() => setLoading(false));
-  }, [history, location, query]);
+  }, [query, location, history]);
 
   const HandleMovieSearch = newQuery => {
     setQuery(newQuery);
@@ -50,7 +46,7 @@ const MoviesPage = props => {
   return (
     <>
      <SearchBar onSubmit={HandleMovieSearch}/>
-     <MoviesList movies={movies} />
+     <MoviesList movies={movies} loading={loading}/>
     </>
   )
 }

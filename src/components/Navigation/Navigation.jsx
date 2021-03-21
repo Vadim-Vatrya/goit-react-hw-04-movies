@@ -5,15 +5,24 @@ import {NavLink} from 'react-router-dom';
 const Navigation = () => {
   return (
   <nav>
-    <NavLink 
+    <ul>
+      <li>
+      <NavLink 
       exact  
       to="/"
-      >Home
+      >
+        Home
     </NavLink>
-    <NavLink
-      exact
+      </li>
+      <li>
+      <NavLink
       to="/movies"
-    >Movies</NavLink>
+    >
+      Movies
+    </NavLink>
+      </li>
+    </ul>
+    
   </nav>
   ); 
 };

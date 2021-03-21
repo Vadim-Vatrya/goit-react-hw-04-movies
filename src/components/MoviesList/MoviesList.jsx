@@ -1,22 +1,34 @@
-import { NavLink} from 'react-router-dom';
+import { NavLink, useRouteMatch, useLocation } from "react-router-dom";
 import PropTypes from 'prop-types';
+
+// import Loader from '../Loader/Loader';
 import MoviesListItem from '../MoviesListItem/MoviesListItem';
 
-const MoviesList = ({movies, location}) => {
+const MoviesList = ({movies, loading = false}) => {
+
+  const { url } = useRouteMatch();
+  const location = useLocation();
+
   return (
     <>
+    {/* <Loader loading={loading} /> */}
     <ul>
-      {movies.map(({id, poster_path, original_title, release_date}) => (
-        <li key={id}>
-          <NavLink
-          exact
-          to={{
-            pathname: `movies/${id}`,
-            state: { from: location}}}>
-          <MoviesListItem   poster={poster_path} title={original_title}   date={release_date} />
-          </NavLink>
-        </li>
-      ))}
+    {movies && movies.map(({ poster_path, title, id }) => (
+            <li key={id}>
+             <NavLink
+             exact
+              to={{
+                pathname: `${url}/${id}`,
+                state: { from: location}}}>
+                <MoviesListItem 
+                id={id}
+                poster={poster_path} 
+                title={title}/>
+             </NavLink>
+            </li>
+            )) 
+        }
+     
     </ul>
     </>
   );

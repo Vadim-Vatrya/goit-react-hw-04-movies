@@ -2,28 +2,31 @@ import PropTypes from 'prop-types';
 import noImage from '../../image/noImage.png';
 
 
-const MoviesListItem = ({ poster, title, date }) => {
-  const srcPoster= poster ? `https://image.tmdb.org/t/p/w200${poster}` : noImage;
-
+const MoviesListItem = ({ poster, title }) => {
+  
   return (
     <div >
-      <img src={srcPoster} alt={`Film ${title} poster`}/>
+      <img 
+      src={poster 
+        ? `https://image.tmdb.org/t/p/w200${poster}`
+        : noImage
+      } 
+      alt={`Poster ${title}`}
+      width='400' 
+      height='550'
+      />
       <h2>{title}</h2>
-      <p>{date}</p>
     </div>
   );
 };
 
-// MoviesListItem.defaultProps = {
-//   poster: defaultImage
-// };
 
 
 MoviesListItem.propTypes = {
   poster: PropTypes.string,
   title: PropTypes.string.isRequired,
-  date: PropTypes.string.isRequired,
 };
+
 export default MoviesListItem;
 
   
