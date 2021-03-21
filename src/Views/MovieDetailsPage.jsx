@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { NavLink, Route, useRouteMatch } from 'react-router-dom';
+import { NavLink, Route, useRouteMatch, useParams } from 'react-router-dom';
 import { getMoviesDetailsViews } from "../service/api-service";
 // import { toast } from 'react-toastify';
 // import routes from 'routes';
@@ -11,7 +11,7 @@ import MovieCard from '../components/MovieCard/MovieCard';
 
 const MovieDetailsPage = props => { 
   const {location, history} = props;
-  const { movieId } = props.match.params;
+  const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
   const {url, path} = useRouteMatch();
   const [loading, setLoading] = useState(false);
