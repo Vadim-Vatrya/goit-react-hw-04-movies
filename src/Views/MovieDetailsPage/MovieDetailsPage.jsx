@@ -41,11 +41,12 @@ const MovieDetailsPage = () => {
           {movies && <MovieCard movie={movies} />}
           
           <Route path={`${path}:movieId/cast`}>
-             {movies && <Cast />}
-          </Route>
-          <Route path={`${path}:movieId/rewiews`}>
-             {movies && <Reviews />}
-          </Route>
+        {movies && <Cast />}
+      </Route>
+
+      <Route path={`${path}:movieId/reviews`}>
+        {movies && <Reviews />}
+      </Route>
     </>
   )
 

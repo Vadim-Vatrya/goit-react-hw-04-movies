@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from 'react';
-import Loader from 'react-loader-spinner';
+// import Loader from 'react-loader-spinner';
 
 import {getMoviesReviews} from '../../service/api-service';
 import style from './Reviews.module.scss';
@@ -18,25 +18,23 @@ const Reviews = () => {
   }, [movieId]);
 
   return (
-    <>
-     <Loader
-      type="Oval"
-      color="#00BFFF"
-      height={100}
-      width={100}
-      timeout={2000} 
-    />
-    {review.length > 0
-   ? (<ul className={style.list} >
-    {review.map(({ author, id, content }) => (
-      <li key={id}>
-        <h3>Autor: {author}</h3>
-        <p>{content}</p>
-      </li>
-    ))}
-    </ul>)
-   : (<p>We don't have any rewiews for this movie.</p>)}
-   </>)
+    <div className={style.wrapper}>
+    {review ? (
+      <>
+        <ul className={style.list}>
+          {review.map((item, index) => (
+            <li key={index} className={style.item}>
+              <p className={style.title}>Author: {item.author}</p>
+              <p> {item.content}</p>
+            </li>
+          ))}
+        </ul>
+      </>
+    ) : (
+      <p className={style.text}>No reviews to show</p>
+    )}
+  </div>
+);
 }
 
 
