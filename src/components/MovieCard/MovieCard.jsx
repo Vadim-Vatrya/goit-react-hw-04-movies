@@ -1,4 +1,4 @@
-import noImage from "../../images/noImage.png";
+import noImage from "../../image/noImage.png";
 
 const MovieCard = ({movie}) => {
   const { poster_path, original_title, release_date, overview, id, vote_average } = movie;

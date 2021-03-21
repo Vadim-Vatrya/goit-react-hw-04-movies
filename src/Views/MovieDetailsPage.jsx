@@ -5,6 +5,8 @@ import { getMoviesDetailsViews } from "../service/api-service";
 // import routes from 'routes';
 
 import MovieCard from '../components/MovieCard/MovieCard';
+import Cast from '../components/Cast/Cast';
+import Reviews from '../components/Reviews/Reviews';
 
 
 

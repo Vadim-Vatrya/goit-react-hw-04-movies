@@ -27,11 +27,11 @@ const getMoviesCastViews = id => {
   .then(response => response.data);
 };
 
-const getMoviesReviewsViews = id => {
+const getMoviesReviews = id => {
   return axios.get(`/movie/${id}/reviews?api_key=${API_KEY}&language=en-US`)
   .then(response => response.data);
 };
 
-export {getPopularMovies, getSearchMovies, getMoviesDetailsViews, getMoviesCastViews,getMoviesReviewsViews}
+export {getPopularMovies, getSearchMovies, getMoviesDetailsViews, getMoviesCastViews,getMoviesReviews}
 
 

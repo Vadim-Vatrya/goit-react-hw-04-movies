@@ -6,6 +6,7 @@ import './App.css';
 
 import HomePage from './Views/HomePage';
 import MoviesPage from './Views/MoviesPage';
+import MovieDetailsPage from './Views/MovieDetailsPage';
 
 function App() {
   return (
@@ -15,7 +16,7 @@ function App() {
       <Switch>
         <Route path="/" component={HomePage}/>
         <Route path="/movies" component={MoviesPage}/>
-        {/* <Route path="/movies/:movieId"  component={MovieDetailsPage} /> */}
+        <Route path="/movies/:movieId"  component={MovieDetailsPage} />
         <Redirect to="/" />
       </Switch>
     </Container>
