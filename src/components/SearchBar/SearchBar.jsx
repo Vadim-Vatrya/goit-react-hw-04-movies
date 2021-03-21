@@ -1,44 +1,53 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import {useState} from 'react';
 import { toast } from 'react-toastify';
 
 const SearchBar = ({onSubmit}) => {
-  const [search, setSearch] = useState('');
 
-const handleChange = (event) => {
-    setSearch(event.currentTarget.value);
+  const [value, setValue] = useState('');
+
+const handleChange = event => {
+  setValue(event.target.value.toLowerCase());
 };
 
-const handleSubmit = (event) => {
+const handleSubmit = event => {
   event.preventDefault();
-  if(search.trim === '') {
+  if(value.trim === '') {
     toast.error("You don't load name films");
     return;
   }
-  onSubmit(search);
+  onSubmit(value);
   reset();
 };
 
 const reset = () => {
-  setSearch('');
+  setValue('');
 };
 
 
 
   return(
+    <>
     <form onSubmit={handleSubmit}>
       <button  type="submit">
-        <span>Search</span>
+        <span>Search film</span>
       </button>
+
       <input 
          type="text"
-         value={search}
+         value={value}
          onChange={handleChange}
          autoComplete="off"
          autoFocus
-         placeholder="Search movies" />
+         placeholder="Search film" />
     </form>
+    </>
   )
+};
+
+SearchBar.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
 };
 
 

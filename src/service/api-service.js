@@ -12,13 +12,13 @@ const getPopularMovies = (pageFetch = 1) => {
 };
 
 
-const getSearchMovies = (id, pageFetch = 1, search) => {
-  return axios.get(`/search/${id}?api_key=${API_KEY}&language=en-US&query=${search}&page=${pageFetch}&include_adult=false`)
+const getSearchMovies = (name) => {
+  return axios.get(`/search/movie?api_key=${API_KEY}&language=en-US&query=${name}&page=1&include_adult=false`)
   .then(response => response.data);
 };
 
 const getMoviesDetailsViews = id => {
-  return axios.get(`/movie/${id}/credits?api_key=${API_KEY}&language=en-US`)
+  return axios.get(`/movie/${id}?api_key=${API_KEY}&language=en-US`)
   .then(response => response.data);
 };
 
@@ -32,6 +32,6 @@ const getMoviesReviews = id => {
   .then(response => response.data);
 };
 
-export {getPopularMovies, getSearchMovies, getMoviesDetailsViews, getMoviesCastViews,getMoviesReviews}
+export { getPopularMovies, getSearchMovies, getMoviesDetailsViews, getMoviesCastViews, getMoviesReviews }
 
 

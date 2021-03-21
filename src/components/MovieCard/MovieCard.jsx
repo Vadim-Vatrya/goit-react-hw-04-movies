@@ -1,38 +1,78 @@
+import { NavLink, useRouteMatch, useLocation } from 'react-router-dom';
 import noImage from "../../image/noImage.png";
 
-const MovieCard = ({movie}) => {
-  const { poster_path, original_title, release_date, overview, id, vote_average } = movie;
-  const srcPoster= poster_path ? `https://image.tmdb.org/t/p/w200${poster_path}` : noImage;
+function MovieCard({ movie }) {
+  const location = useLocation();
+  const { url } = useRouteMatch();
+
+  const { poster_path, original_title, release_date, overview,  vote_average } = movie;
+
   return (
     <>
-    <div>
-      <div>
-      <img
-          src={srcPoster}
+      <hr />
+      <div >
+        <img
+          
+          src={
+            poster_path
+              ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+              : noImage
+          }
           alt={original_title}
-          width="200"
-          />
+        />
+        <div >
+          <h2 >{original_title}</h2>
+          <p >User Score: {vote_average}</p>
+          <p >Overview:</p>
+          <p >{overview}</p>
+
+          <p >Genres:</p>
+          {movie.genres && (
+            <ul>
+              {movie.genres.map((item, index) => (
+                <li key={index}>{item.name}</li>
+              ))}
+            </ul>
+          )}
+           {release_date && (
+              <>
+                <p>Date:</p>
+                <p>{release_date}</p>
+              </>
+            )}
+        </div>
       </div>
-
-      <h2>{original_title}</h2>
-        <p>User Rating: {vote_average * 10} %</p>
-        <p >About Film:</p>
-        <p>{overview}</p>
-        <h2>Genres: </h2>
-
+      <div>
+        <p >Additional information</p>
         <ul >
-          {movie.genres.map(({ id, name }) => (
-            <li key={id}>
-              {name}
-            </li>
-          ))}
+          <li >
+            <NavLink
+              to={{
+                pathname: `${url}/cast`,
+                state: { from: location?.state?.from ?? '/' },
+              }}
+              // className={s.link}
+              // activeClassName={s.activeLink}
+            >
+              Cast
+            </NavLink>
+          </li>
+          <li >
+            <NavLink
+              to={{
+                pathname: `${url}/reviews`,
+                state: { from: location?.state?.from ?? '/' },
+              }}
+              // className={s.link}
+              // activeClassName={s.activeLink}
+            >
+              Reviews
+            </NavLink>
+          </li>
         </ul>
-    </div>
-
-    
+      </div>
     </>
   );
-};
-
+}
 
 export default MovieCard;

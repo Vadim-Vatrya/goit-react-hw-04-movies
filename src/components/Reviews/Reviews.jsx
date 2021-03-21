@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useState, useEffect } from 'react';
+import Loader from 'react-loader-spinner';
 
 import {getMoviesReviews} from '../../service/api-service';
 
@@ -10,12 +11,21 @@ const Reviews = () => {
 
   useEffect(() => {
     getMoviesReviews(movieId)
-    .then(({data}) => setReview(data.results))
-    .catch(error => console.log('Error: ', error))
-    // .finally(() => setIsLoading(false));
+    .then(({results}) => setReview(results))
+    // .catch(error => console.log('Error: ', error))
+    
   }, [movieId]);
 
-  return (review && review.length > 0
+  return (
+    <>
+     <Loader
+      type="Oval"
+      color="#00BFFF"
+      height={100}
+      width={100}
+      timeout={2000} 
+    />
+    {review && review.length > 0
    ? (<ul >
     {review.map(({ author, id, content }) => (
       <li key={id}>
@@ -24,7 +34,8 @@ const Reviews = () => {
       </li>
     ))}
     </ul>)
-   : (<p>We don't have any rewiews for this movie.</p>))
+   : (<p>We don't have any rewiews for this movie.</p>)}
+   </>)
 }
 
 export default Reviews;

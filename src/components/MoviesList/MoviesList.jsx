@@ -1,32 +1,40 @@
-import { NavLink, useRouteMatch, useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import PropTypes from 'prop-types';
+import noImage from '../../image/noImage.png';
 
 // import Loader from '../Loader/Loader';
-import MoviesListItem from '../MoviesListItem/MoviesListItem';
 
-const MoviesList = ({movies, loading = false}) => {
 
-  const { url } = useRouteMatch();
+const MoviesList = ({movies, title}) => {
+
   const location = useLocation();
 
   return (
     <>
-    {/* <Loader loading={loading} /> */}
+<h2>{title}</h2>
     <ul>
-    {movies && movies.map(({ poster_path, title, id }) => (
-            <li key={id}>
-             <NavLink
-             exact
-              to={{
-                pathname: `${url}/${id}`,
-                state: { from: location}}}>
-                <MoviesListItem 
-                id={id}
-                poster={poster_path} 
-                title={title}/>
-             </NavLink>
-            </li>
-            )) 
+    {movies && movies.map(({ poster_path, title, id }) => {
+            return (
+              <li key={id} >
+                <Link
+                  to={{
+                    pathname: `movies/${id}`,
+                    state: { from: location },
+                  }}
+                >
+                  <img
+                    src={
+                      poster_path
+                        ? `https://image.tmdb.org/t/p/w500${poster_path}`
+                        : noImage
+                    }
+                    alt={title}
+                  />
+                  <p >{title}</p>
+                </Link>
+              </li>
+            );
+          }) 
         }
      
     </ul>
