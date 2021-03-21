@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import {useState} from 'react';
 import { toast } from 'react-toastify';
 
+import style from './SearchBar.module.scss';
+
 const SearchBar = ({onSubmit}) => {
 
   const [value, setValue] = useState('');
@@ -28,13 +30,14 @@ const reset = () => {
 
 
   return(
-    <>
-    <form onSubmit={handleSubmit}>
-      <button  type="submit">
-        <span>Search film</span>
+    <div className={style.Searchbar}>
+    <form onSubmit={handleSubmit} className={style.SearchForm}>
+      <button  type="submit" className={style.SearchButton}>
+        <span className={style.SearchFormButton}>Search film</span>
       </button>
 
       <input 
+         className={style.SearchInput}
          type="text"
          value={value}
          onChange={handleChange}
@@ -42,7 +45,7 @@ const reset = () => {
          autoFocus
          placeholder="Search film" />
     </form>
-    </>
+    </div>
   )
 };
 

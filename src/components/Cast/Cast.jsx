@@ -4,6 +4,7 @@ import Loader from 'react-loader-spinner';
 
 import noImage from '../../image/noImage.png';
 import {getMoviesCastViews} from '../../service/api-service';
+import style from './Cast.module.scss';
 
 
 const Cast = () => {
@@ -29,16 +30,19 @@ const Cast = () => {
       timeout={2000} 
     />
     {casts && casts.length > 0 
-    ? (<ul>
+    ? (
+    
+    <ul className={style.movieItem}>
       {casts.map(({ original_name, id, profile_path }) => (
-        <li key={id}>
+        <li className={style.item} key={id}>
           <img
+          className={style.image}
           src={profile_path ? `https://image.tmdb.org/t/p/w200${profile_path}` : noImage}
           alt={original_name ? original_name : `image`}
           width='150'
           height='230'
           />
-          <h4>{original_name ? original_name : `No name`}</h4>
+          <h4 className={style.title}>{original_name ? original_name : `No name`}</h4>
           
         </li>
       )

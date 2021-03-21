@@ -1,13 +1,14 @@
 import { useState, useEffect } from 'react';
 import { useLocation, useHistory } from 'react-router-dom';
-import {getSearchMovies} from '../service/api-service';
 import { toast } from 'react-toastify';
 
 
+import {getSearchMovies} from '../../service/api-service';
+import MoviesList from '../../components/MoviesList';
+import SearchBar from '../../components/SearchBar';
+import Loader from '../../components/Loader';
 
-import MoviesList from '../components/MoviesList/MoviesList';
-import SearchBar from '../components/SearchBar/SearchBar';
-import Loader from '../components/Loader/Loader';
+
 
 
 const MoviesPage = () => {

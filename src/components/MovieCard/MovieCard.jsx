@@ -1,7 +1,9 @@
 import { NavLink, useRouteMatch, useLocation } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import noImage from "../../image/noImage.png";
+import style from './MovieCard.module.scss';
 
-function MovieCard({ movie }) {
+const MovieCard = ({ movie }) => {
   const location = useLocation();
   const { url } = useRouteMatch();
 
@@ -10,9 +12,9 @@ function MovieCard({ movie }) {
   return (
     <>
       <hr />
-      <div >
+      <div className={style.card}>
         <img
-          
+          className={style.imageMovie}
           src={
             poster_path
               ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
@@ -20,15 +22,15 @@ function MovieCard({ movie }) {
           }
           alt={original_title}
         />
-        <div >
-          <h2 >{original_title}</h2>
-          <p >User Score: {vote_average}</p>
-          <p >Overview:</p>
-          <p >{overview}</p>
+        <div className={style.content}>
+          <h2 className={style.title}>{original_title}</h2>
+          <p className={style.text}>User Score: {vote_average * 10}%</p>
+          <p className={style.category}>Overview:</p>
+          <p className={style.text}>{overview}</p>
 
-          <p >Genres:</p>
+          <p className={style.category}>Genres:</p>
           {movie.genres && (
-            <ul>
+            <ul className={style.ulGenre}>
               {movie.genres.map((item, index) => (
                 <li key={index}>{item.name}</li>
               ))}
@@ -36,35 +38,35 @@ function MovieCard({ movie }) {
           )}
            {release_date && (
               <>
-                <p>Date:</p>
-                <p>{release_date}</p>
+                <p className={style.text}>Date:</p>
+                <p className={style.text}>{release_date}</p>
               </>
             )}
         </div>
       </div>
-      <div>
-        <p >Additional information</p>
-        <ul >
-          <li >
+      <div className={style.nav}>
+        <p className={style.category}>Additional information</p>
+        <ul className={style.list}>
+          <li className={style.item}>
             <NavLink
               to={{
                 pathname: `${url}/cast`,
                 state: { from: location?.state?.from ?? '/' },
               }}
-              // className={s.link}
-              // activeClassName={s.activeLink}
+              className={style.link}
+              activeClassName={style.activeLink}
             >
               Cast
             </NavLink>
           </li>
-          <li >
+          <li className={style.item}>
             <NavLink
               to={{
                 pathname: `${url}/reviews`,
                 state: { from: location?.state?.from ?? '/' },
               }}
-              // className={s.link}
-              // activeClassName={s.activeLink}
+              className={style.link}
+              activeClassName={style.activeLink}
             >
               Reviews
             </NavLink>
@@ -74,5 +76,9 @@ function MovieCard({ movie }) {
     </>
   );
 }
+
+MovieCard.propTypes = {
+  movie: PropTypes.object.isRequired,
+};
 
 export default MovieCard;

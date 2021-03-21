@@ -1,9 +1,11 @@
 import React from 'react';
 import {useState, useEffect} from 'react';
 
-import {getPopularMovies} from '../service/api-service';
-import MoviesList from '../components/MoviesList/MoviesList';
-import Loader from '../components/Loader/Loader';
+import {getPopularMovies} from '../../service/api-service';
+import MoviesList from '../../components/MoviesList';
+import Loader from '../../components/Loader';
+import style from "./HomePage.module.scss";
+
 
 
 const HomePage = () => {
@@ -24,7 +26,7 @@ const HomePage = () => {
 
  return (
    <>
-   <h1>Movies in trend</h1>
+   <h1 className={style.title}>Movies in trend</h1>
    <MoviesList movies={movies}/>
    {isLoading && <Loader />}
    </>

@@ -2,6 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import PropTypes from 'prop-types';
 import noImage from '../../image/noImage.png';
 
+import style from './MoviesList.module.scss';
 // import Loader from '../Loader/Loader';
 
 
@@ -10,12 +11,12 @@ const MoviesList = ({movies, title}) => {
   const location = useLocation();
 
   return (
-    <>
+    <div className={style.wrapper}>
 <h2>{title}</h2>
-    <ul>
+    <ul className={style.list}>
     {movies && movies.map(({ poster_path, title, id }) => {
             return (
-              <li key={id} >
+              <li key={id} className={style.item}>
                 <Link
                   to={{
                     pathname: `movies/${id}`,
@@ -23,6 +24,7 @@ const MoviesList = ({movies, title}) => {
                   }}
                 >
                   <img
+                  className={style.image}
                     src={
                       poster_path
                         ? `https://image.tmdb.org/t/p/w500${poster_path}`
@@ -30,7 +32,7 @@ const MoviesList = ({movies, title}) => {
                     }
                     alt={title}
                   />
-                  <p >{title}</p>
+                  <p className={style.title}>{title}</p>
                 </Link>
               </li>
             );
@@ -38,7 +40,7 @@ const MoviesList = ({movies, title}) => {
         }
      
     </ul>
-    </>
+    </div>
   );
 };
 

@@ -1,8 +1,9 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import style from './Container.module.scss';
 
 const Container = ({children}) => {
-return <div>
+return <div className={style.container}>
   {children}
 </div>
 }

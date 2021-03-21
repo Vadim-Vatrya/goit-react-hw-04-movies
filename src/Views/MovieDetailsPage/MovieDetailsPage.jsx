@@ -1,12 +1,12 @@
 import { useState, useEffect } from 'react';
 import { Route, useRouteMatch, useParams, useLocation, useHistory } from 'react-router-dom';
-import { getMoviesDetailsViews } from "../service/api-service";
+import { getMoviesDetailsViews } from "../../service/api-service";
 // import { toast } from 'react-toastify';
 // import routes from 'routes';
  
-import MovieCard from '../components/MovieCard/MovieCard';
-import Cast from '../components/Cast/Cast';
-import Reviews from '../components/Reviews/Reviews';
+import MovieCard from '../../components/MovieCard';
+import Cast from '../../components/Cast';
+import Reviews from '../../components/Reviews';
 
 
 

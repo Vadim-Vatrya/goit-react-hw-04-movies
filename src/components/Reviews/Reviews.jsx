@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Loader from 'react-loader-spinner';
 
 import {getMoviesReviews} from '../../service/api-service';
+import style from './Reviews.module.scss';
 
 
 const Reviews = () => {
@@ -11,8 +12,8 @@ const Reviews = () => {
 
   useEffect(() => {
     getMoviesReviews(movieId)
-    .then(({results}) => setReview(results))
-    // .catch(error => console.log('Error: ', error))
+    .then(({data }) => setReview(data.results))
+    .catch(error => console.log('Error: ', error))
     
   }, [movieId]);
 
@@ -25,8 +26,8 @@ const Reviews = () => {
       width={100}
       timeout={2000} 
     />
-    {review && review.length > 0
-   ? (<ul >
+    {review.length > 0
+   ? (<ul className={style.list} >
     {review.map(({ author, id, content }) => (
       <li key={id}>
         <h3>Autor: {author}</h3>
@@ -37,5 +38,6 @@ const Reviews = () => {
    : (<p>We don't have any rewiews for this movie.</p>)}
    </>)
 }
+
 
 export default Reviews;
